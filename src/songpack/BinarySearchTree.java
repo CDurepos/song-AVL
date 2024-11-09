@@ -46,7 +46,7 @@ public class BinarySearchTree {
      * @return Node<Song>
      *      the root of the current tree
      */
-    protected Node<Song> insert(Song item, Node<Song> root) {
+    private Node<Song> insert(Song item, Node<Song> root) {
 
         if (root == null) {
             return new Node<>(item);
@@ -294,6 +294,13 @@ public class BinarySearchTree {
         return null;
     }
 
+    protected int height(Node<Song> node) {
+        if (node == null)
+            return -1;
+
+        return node.height;
+    }
+
 
     /**
      * A node class for BinarySearchTree
@@ -301,15 +308,18 @@ public class BinarySearchTree {
     public static class Node<T> {
         protected final T data;
         protected Node<T> left, right;
+        protected int height;
 
         public Node() {
             this.data = null;
             this.left = this.right = null;
+            this.height = 0;
         }
 
         public Node(T data) {
             this.data = data;
             this.left = this.right = null;
+            this.height = 0;
 
         }
     }

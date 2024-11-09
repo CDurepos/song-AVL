@@ -3,7 +3,6 @@ package songpack;
 import java.util.ArrayList;
 
 public class AVLTree extends BinarySearchTree {
-    private AVLNode<Song> root;
     public int leftRotations = 0, rightRotations = 0, leftRightRotations = 0, rightLeftRotations = 0;
 
     public AVLTree() {
@@ -19,9 +18,9 @@ public class AVLTree extends BinarySearchTree {
         this.root = insert(item, this.root);
     }
 
-    private AVLNode<Song> insert(Song item, AVLNode<Song> node) {
+    private Node<Song> insert(Song item, Node<Song> node) {
         if (node == null) {
-            return new AVLNode<>(item);
+            return new Node<>(item);
         }
 
         if (item.compareTo(node.data) < 0) {
@@ -34,20 +33,16 @@ public class AVLTree extends BinarySearchTree {
         return balance(node);
     }
 
-    private int getHeight(AVLNode<Song> node) {
-        return (node == null) ? -1 : node.height;
+    private void updateHeight(Node<Song> node) {
+        node.height = 1 + Math.max(height(node.left), height(node.right));
     }
 
-    private void updateHeight(AVLNode<Song> node) {
-        node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
+    private int getBalance(Node<Song> node) {
+        return (node == null) ? 0 : height(node.left) - height(node.right);
     }
 
-    private int getBalance(AVLNode<Song> node) {
-        return (node == null) ? 0 : getHeight(node.left) - getHeight(node.right);
-    }
-
-    private AVLNode<Song> rotateRight(AVLNode<Song> node) {
-        AVLNode<Song> child = node.left;
+    private Node<Song> rotateRight(Node<Song> node) {
+        Node<Song> child = node.left;
         node.left = child.right;
         child.right = node;
 
@@ -57,8 +52,8 @@ public class AVLTree extends BinarySearchTree {
 
     }
 
-    private AVLNode<Song> rotateLeft(AVLNode<Song> node) {
-        AVLNode<Song> child = node.right;
+    private Node<Song> rotateLeft(Node<Song> node) {
+        Node<Song> child = node.right;
         node.right = child.left;
         child.left = node;
 
@@ -67,7 +62,7 @@ public class AVLTree extends BinarySearchTree {
         return child;
     }
 
-    private AVLNode<Song> balance(AVLNode<Song> node) {
+    private Node<Song> balance(Node<Song> node) {
         int balance = getBalance(node);
 
         if (balance > 1) {
@@ -79,12 +74,6 @@ public class AVLTree extends BinarySearchTree {
                 node = rotateRight(node);
                 leftRightRotations++;
             }
-
-//            if (getBalance(node.left) < 0) {
-//                node.left = rotateLeft(node.left);
-//            }
-//
-//            node = rotateRight(node);
         }
 
         else if (balance < -1) {
@@ -96,29 +85,8 @@ public class AVLTree extends BinarySearchTree {
                 node = rotateLeft(node);
                 rightLeftRotations++;
             }
-
-//            if (getBalance(node.right) > 0) {
-//                node.right = rotateRight(node.right);
-//            }
-//
-//            node = rotateLeft(node);
         }
 
         return node;
-    }
-
-    private static class AVLNode<T> extends Node<T> {
-        private int height;
-        private AVLNode<T> left, right;
-
-        public AVLNode() {
-            height = 0;
-            this.left = this.right = null;
-        }
-
-        public AVLNode(T data) {
-            super(data);
-            height = 0;
-        }
     }
 }
