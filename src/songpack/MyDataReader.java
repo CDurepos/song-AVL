@@ -53,16 +53,16 @@ public class MyDataReader {
      */
     public static AVLTree readFileToAVL(String tsvFilePath, String tag) throws IOException
     {
-        AVLTree songsBST= new AVLTree();
+        AVLTree songsAVL = new AVLTree();
         BufferedReader TSVReader = new BufferedReader(new FileReader(tsvFilePath));
         String line = TSVReader.readLine();
         while ((line = TSVReader.readLine()) != null) {
             Song song = MyDataReader.lineToReport(line);
             if(song.getTag().equals(tag))
-                songsBST.insert(song);
+                songsAVL.insert(song);
         }
 
-        return songsBST;
+        return songsAVL;
     }
 
 }

@@ -83,7 +83,7 @@ public class BinarySearchTree {
      * @param result
      *      the ArrayList of Songs that satisfy the search condition; the ArrayList that will be added to
      */
-    protected void search(int views, Node<Song> root, ArrayList<Song> result) {
+    private void search(int views, Node<Song> root, ArrayList<Song> result) {
         if (root == null) {
             return;
         }
