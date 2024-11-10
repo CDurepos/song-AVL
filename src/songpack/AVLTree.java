@@ -1,27 +1,19 @@
 package songpack;
 
-import java.util.ArrayList;
-
 public class AVLTree extends BinarySearchTree {
     public int leftRotations = 0, rightRotations = 0, leftRightRotations = 0, rightLeftRotations = 0;
 
     public AVLTree() {
-        this.root = null;
-    }
-
-    public int height() {
-        return this.root.height;
+        root = null;
     }
 
     @Override
     public void insert(Song item) {
-        this.root = insert(item, this.root);
+        root = insert(item, root);
     }
 
     private Node<Song> insert(Song item, Node<Song> node) {
-        if (node == null) {
-            return new Node<>(item);
-        }
+        if (node == null) return new Node<>(item);
 
         if (item.compareTo(node.data) < 0) {
             node.left = insert(item, node.left);
@@ -33,12 +25,12 @@ public class AVLTree extends BinarySearchTree {
         return balance(node);
     }
 
-    private void updateHeight(Node<Song> node) {
-        node.height = 1 + Math.max(height(node.left), height(node.right));
+    protected int height() {
+        return root.height;
     }
 
-    private int getBalance(Node<Song> node) {
-        return (node == null) ? 0 : height(node.left) - height(node.right);
+    private void updateHeight(Node<Song> node) {
+        node.height = 1 + Math.max(height(node.left), height(node.right));
     }
 
     private Node<Song> rotateRight(Node<Song> node) {
@@ -62,11 +54,15 @@ public class AVLTree extends BinarySearchTree {
         return child;
     }
 
+    private int balanceFactor(Node<Song> node) {
+        return (node == null) ? 0 : height(node.left) - height(node.right);
+    }
+
     private Node<Song> balance(Node<Song> node) {
-        int balance = getBalance(node);
+        int balance = balanceFactor(node);
 
         if (balance > 1) {
-            if (getBalance(node.left) >= 0) {
+            if (balanceFactor(node.left) >= 0) {
                 node = rotateRight(node);
                 rightRotations++;
             } else {
@@ -77,7 +73,7 @@ public class AVLTree extends BinarySearchTree {
         }
 
         else if (balance < -1) {
-            if (getBalance(node.right) <= 0) {
+            if (balanceFactor(node.right) <= 0) {
                 node = rotateLeft(node);
                 leftRotations++;
             } else {

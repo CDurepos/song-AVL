@@ -305,7 +305,7 @@ public class BinarySearchTree {
     /**
      * A node class for BinarySearchTree
      */
-    public static class Node<T> {
+    protected static class Node<T> {
         protected final T data;
         protected Node<T> left, right;
         protected int height;
