@@ -3,15 +3,32 @@ package songpack;
 public class AVLTree extends BinarySearchTree {
     public int leftRotations = 0, rightRotations = 0, leftRightRotations = 0, rightLeftRotations = 0;
 
+    /**
+     * Constructor
+     */
     public AVLTree() {
         root = null;
     }
 
+    /**
+     * The wrapper method for recursive insertion method
+     * @param item
+     *      the Song to be inserted into this AVLTree
+     */
     @Override
     public void insert(Song item) {
         root = insert(item, root);
     }
 
+    /**
+     * Recursively insert a new Song
+     * @param item
+     *      the song to be inserted into this tree
+     * @param node
+     *      the root node of the tree in which 'item' is to be inserted
+     * @return Node<Song>
+     *      the root of the current tree
+     */
     private Node<Song> insert(Song item, Node<Song> node) {
         if (node == null) return new Node<>(item);
 
@@ -25,14 +42,31 @@ public class AVLTree extends BinarySearchTree {
         return balance(node);
     }
 
+    /**
+     * Get the height of this AVLTree
+     * @return int
+     *      the height of this AVLTree; the height of the root of this AVLTree
+     */
     protected int height() {
         return root.height;
     }
 
+    /**
+     * Update the height of a node
+     * @param node
+     *      the node to be updated
+     */
     private void updateHeight(Node<Song> node) {
         node.height = 1 + Math.max(height(node.left), height(node.right));
     }
 
+    /**
+     * Perform a right rotation on an AVLTree
+     * @param node
+     *      the root of the AVLTree to be rotated
+     * @return Node<Song>
+     *      the root of the rotated AVLTree
+     */
     private Node<Song> rotateRight(Node<Song> node) {
         Node<Song> child = node.left;
         node.left = child.right;
@@ -44,6 +78,13 @@ public class AVLTree extends BinarySearchTree {
 
     }
 
+    /**
+     * Perform a left rotation on an AVLTree
+     * @param node
+     *      the root of the AVLTree to be rotated
+     * @return Node<Song>
+     *      the root of the rotated AVLTree
+     */
     private Node<Song> rotateLeft(Node<Song> node) {
         Node<Song> child = node.right;
         node.right = child.left;
@@ -54,10 +95,24 @@ public class AVLTree extends BinarySearchTree {
         return child;
     }
 
+    /**
+     * Get the balance factor of a node
+     * @param node
+     *      the node whose balance factor is to be calculated
+     * @return int
+     *      the balance factor of 'node'
+     */
     private int balanceFactor(Node<Song> node) {
         return (node == null) ? 0 : height(node.left) - height(node.right);
     }
 
+    /**
+     * Balance an AVLTree
+     * @param node
+     *      the root node of the AVLTree to be balanced
+     * @return Node<Song>
+     *      the root of the balanced AVLTree
+     */
     private Node<Song> balance(Node<Song> node) {
         int balance = balanceFactor(node);
 
