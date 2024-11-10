@@ -294,13 +294,7 @@ public class BinarySearchTree {
         return null;
     }
 
-    protected int height(Node<Song> node) {
-        if (node == null)
-            return -1;
-
-        return node.height;
-    }
-
+    protected int height(Node<Song> node) {return (node==null) ? -1 : node.height;}
 
     /**
      * A node class for BinarySearchTree
