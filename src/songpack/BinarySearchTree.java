@@ -294,7 +294,7 @@ public class BinarySearchTree {
         return null;
     }
 
-    protected int height(Node<Song> node) {return (node==null) ? -1 : node.height;}
+    protected int height(Node<Song> node) {return (node==null) ? 0 : node.height;}
 
     /**
      * A node class for BinarySearchTree
@@ -307,13 +307,13 @@ public class BinarySearchTree {
         public Node() {
             this.data = null;
             this.left = this.right = null;
-            this.height = 0;
+            this.height = 1;
         }
 
         public Node(T data) {
             this.data = data;
             this.left = this.right = null;
-            this.height = 0;
+            this.height = 1;
 
         }
     }
