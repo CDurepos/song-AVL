@@ -21,6 +21,7 @@ public class program7 {
         BinarySearchTree bst = MyDataReader.readFileToBST(args[0], args[1]);
         end = System.currentTimeMillis();
         System.out.println( (end-start) + " milliseconds to build the BST for " + args[1] + " songs");
+        System.out.println("The height of this tree is: " + bst.height());
 
         searches(bst);
 

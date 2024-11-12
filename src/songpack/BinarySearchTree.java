@@ -58,6 +58,7 @@ public class BinarySearchTree {
             root.right = insert(item, root.right);
         }
 
+        updateHeight(root);
         return root;
     }
 
@@ -294,7 +295,25 @@ public class BinarySearchTree {
         return null;
     }
 
+    /**
+     * Get the height of this AVLTree
+     * @return int
+     *      the height of this AVLTree; the height of the root of this AVLTree
+     */
+    protected int height() {
+        return root.height;
+    }
+
     protected int height(Node<Song> node) {return (node==null) ? 0 : node.height;}
+
+    /**
+     * Update the height of a node
+     * @param node
+     *      the node to be updated
+     */
+    protected void updateHeight(Node<Song> node) {
+        node.height = 1 + Math.max(height(node.left), height(node.right));
+    }
 
     /**
      * A node class for BinarySearchTree

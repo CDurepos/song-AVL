@@ -43,24 +43,6 @@ public class AVLTree extends BinarySearchTree {
     }
 
     /**
-     * Get the height of this AVLTree
-     * @return int
-     *      the height of this AVLTree; the height of the root of this AVLTree
-     */
-    protected int height() {
-        return root.height;
-    }
-
-    /**
-     * Update the height of a node
-     * @param node
-     *      the node to be updated
-     */
-    private void updateHeight(Node<Song> node) {
-        node.height = 1 + Math.max(height(node.left), height(node.right));
-    }
-
-    /**
      * Perform a right rotation on an AVLTree
      * @param node
      *      the root of the AVLTree to be rotated
