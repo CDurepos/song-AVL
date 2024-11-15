@@ -30,7 +30,7 @@ public class program7 {
     }
 
     private static void searches(BinarySearchTree tree) {
-        int[] views = new int[]{-2, 12345, 2, 5000, 1000000};
+        int[] views = new int[]{-3, 5000, 10000, 20000, 50000};
 
         for (int i = 0; i < views.length; i++) {
 
@@ -38,7 +38,7 @@ public class program7 {
             tree.search(views[i]);
             long end = System.nanoTime();
 
-            System.out.println((end-start) + " nanoseconds for search " + (i+1));
+            System.out.println((end-start) / 1000 + " microseconds for search " + (i+1));
         }
     }
 }

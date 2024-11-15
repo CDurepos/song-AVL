@@ -5,8 +5,9 @@ import java.util.ArrayList;
 /**
  * An implementation of a BinarySearchTree of Song Objects
  * Written for Assignment 5 of COS285 Data Structures w/ Dr. Behrooz Mansouri @ The University of Southern Maine
+ * Updated for AVL Tree extension for Assignment 7
  * @author Clayton Durepos
- * @version 10.18.2024
+ * @version 11.14.2024
  */
 public class BinarySearchTree {
     protected Node<Song> root;
@@ -89,17 +90,12 @@ public class BinarySearchTree {
             return;
         }
 
-        if (root.data.getViews() < views) {
-            search(views, root.right, result);
-        }
-
         if (root.data.getViews() >= views) {
             search(views, root.left, result);
             result.add(root.data);
-            search(views, root.right, result);
         }
 
-
+        search(views, root.right, result);
     }
 
     /**
@@ -300,7 +296,7 @@ public class BinarySearchTree {
      * @return int
      *      the height of this AVLTree; the height of the root of this AVLTree
      */
-    protected int height() {
+    public int height() {
         return root.height;
     }
 

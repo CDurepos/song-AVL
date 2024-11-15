@@ -38,7 +38,6 @@ public class MyDataReader {
         String line = TSVReader.readLine();
         while ((line = TSVReader.readLine()) != null) {
             Song song = MyDataReader.lineToReport(line);
-            if (song.getTag().equals(tag))
                 songsBST.insert(song);
         }
         return songsBST;
@@ -58,7 +57,6 @@ public class MyDataReader {
         String line = TSVReader.readLine();
         while ((line = TSVReader.readLine()) != null) {
             Song song = MyDataReader.lineToReport(line);
-            if(song.getTag().equals(tag))
                 songsAVL.insert(song);
         }
 

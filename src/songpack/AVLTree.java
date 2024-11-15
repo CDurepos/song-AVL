@@ -1,5 +1,11 @@
 package songpack;
 
+/**
+ * An implementation of a BinarySearchTree of Song Objects
+ * Written for Assignment 7 of COS285 Data Structures w/ Dr. Behrooz Mansouri @ The University of Southern Maine
+ * @author Clayton Durepos
+ * @version 11.14.2024
+ */
 public class AVLTree extends BinarySearchTree {
     public int leftRotations = 0, rightRotations = 0, leftRightRotations = 0, rightLeftRotations = 0;
 
@@ -7,7 +13,7 @@ public class AVLTree extends BinarySearchTree {
      * Constructor
      */
     public AVLTree() {
-        root = null;
+        super();
     }
 
     /**
@@ -100,24 +106,24 @@ public class AVLTree extends BinarySearchTree {
 
         if (balance > 1) {
             if (balanceFactor(node.left) >= 0) {
-                node = rotateRight(node);
                 rightRotations++;
             } else {
                 node.left = rotateLeft(node.left);
-                node = rotateRight(node);
                 leftRightRotations++;
             }
+
+            return rotateRight(node);
         }
 
         else if (balance < -1) {
             if (balanceFactor(node.right) <= 0) {
-                node = rotateLeft(node);
                 leftRotations++;
             } else {
                 node.right = rotateRight(node.right);
-                node = rotateLeft(node);
                 rightLeftRotations++;
             }
+
+            return rotateLeft(node);
         }
 
         return node;
